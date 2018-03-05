@@ -1,0 +1,10 @@
+page-resturants {
+
+}
+.comma:after{
+    content: ", ";
+    }
+    .comma:last-child:after{
+        content: none;
+    }
+    

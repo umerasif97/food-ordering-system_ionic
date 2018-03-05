@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons>
+          <button ion-button icon-only (click)="back()" float-left>
+              <ion-icon name="arrow-back"></ion-icon>
+          </button>
+          <button ion-button icon-only (click)="cart()" float-right>
+              <ion-icon name="cart"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title style="text-align: center">{{ menus.resturantName }} MENU</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngFor="let dish of menus.dishes">
+      <img [src]="dish.dishImage" >
+      <ion-card-content>
+          <ion-card-title>
+              <h5>Name: {{ dish.dishName }}</h5>
+          </ion-card-title>
+          <p>Price: {{ dish.dishPrice | currency:"&#8360;"}}</p>
+          <input type="number" placeholder="Enter Quantity" [(ngModel)]="dish.dishQuantity" min="1" style="width: 100px;">
+          <br>
+          <br>
+          <button ion-button color="secondary" style="height: 1.8em; width: 100px;" [disabled]="dish.dishQuantity > 0 ? false : true"
+              (click)="addToCart(menus.resturantId, menus.resturantName, dish.dishId ,dish.dishName, dish.dishPrice, dish.dishQuantity, dish.totalPrice)">Add to Cart</button>
+          <br>
+          <br>
+      </ion-card-content>
+  </ion-card>
+</ion-content>

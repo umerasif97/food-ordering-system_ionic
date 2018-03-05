@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons>
+          <button ion-button icon-only (click)="cart()" float-right>
+              <ion-icon name="cart"></ion-icon>
+          </button>
+      </ion-buttons>
+    <ion-title style="text-align: center">RESTURANTS</ion-title>
+  </ion-toolbar>  
+</ion-header>
+<ion-content>
+  <ion-card *ngFor="let resturants of resturants | async">
+    <img [src]="resturants.picture" >
+    <ion-card-content>
+      <ion-card-title>
+        <h1>{{ resturants.name }}</h1>
+      </ion-card-title>
+      <p>{{ resturants.detail }}</p>
+      <span *ngFor="let cusine of resturants.cusines" class="comma">{{ cusine }}</span>
+      <br>
+      <br>
+      <button ion-button color="primary" style="height: 1.8em;" (click)="showMenu(resturants.id)">Menu</button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

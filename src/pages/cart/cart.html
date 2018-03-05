@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <button ion-button icon-only (click)="menu()" float-left>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="checkOut()" float-right>
+        <ion-icon name="md-checkmark-circle-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title style="text-align: center">
+      <ion-icon name="cart"></ion-icon>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div style="margin-left: 10px;">
+    <div *ngFor="let cart of cart" style="margin-left: 2px;">
+      <ion-row>
+        <ion-col col-8>
+          <h5>Resturant Name: {{ cart.resturantName }}</h5>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button icon-only color="danger" (click)="removeResturantFromCart(cart.resturantId)" style="height: 25px; margin-top: 10px;" float-right>
+            <ion-icon name="remove"></ion-icon>
+          </button>
+        </ion-col>
+        <hr>
+      </ion-row>
+      <br>
+      <div *ngFor="let dish of cart.dishes">
+        <div class="row">
+          <ion-col col-8>
+            <p>Dish Name: {{ dish.dishName }}</p>
+          </ion-col>
+          <ion-col col-4>
+            <button ion-button color="danger" (click)="removeDishFromCart(cart.resturantId, dish.dishId)" style="height: 23px; padding-top: 0px;" float-right>X</button>
+          </ion-col>
+        </div>
+        <p style="margin-left: 6px;">Price: {{ dish.dishPrice | currency:"&#8360;"}}</p>
+        <ion-row>
+          <ion-col col-7>
+            <p> Quantity: {{ dish.dishQuantity }}</p>
+          </ion-col>
+          <ion-col col-5>
+            <button ion-button style="height: 30px;" (click)="increase(cart.resturantId, dish.dishId)" float-right>+</button>
+            <button ion-button color="danger" style="height: 30px;" (click)="decrease(cart.resturantId, dish.dishId)" float-right>-</button>
+          </ion-col>
+        </ion-row>
+      </div>
+      <p style="margin-left: 6px;">Total Bill: {{ cart.totalPrice | currency:"&#8360;"}}</p>
+      <hr>
+    </div>
+    <hr>
+    <div class="row" style="margin-left: 7px;">
+      <div *ngIf="totalCartBill > 0; bill">
+        <p #bill>Bill: {{ totalCartBill | currency:"&#8360;"}}</p>
+      </div>
+      <!-- <button ion-button color="secondary" (click)="form()" style="height: 25px; padding-top: 2px; margin-left: 100px;">CheckOut</button> -->
+    </div>
+  </div>
+</ion-content>
